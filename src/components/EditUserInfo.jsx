@@ -1,17 +1,30 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
-import { useState } from "react";
+import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import axios from '../axios';
 
-const EditUserInfo = ({ user }) => {
+const EditUserInfo = () => {
+
 
     const [userDTO, setUser] = useState({
-        username: user.username,
-        email: user.email,
-        name: user.name,
-        lastname: user.lastname,
-        dateOfBirth: user.dateOfBirth,
-        about: user.about
+        username: '',
+        email: '',
+        name: '',
+        lastname: '',
+        dateOfBirth: '',
+        about: ''
     })
+
+    useEffect(() => {
+        axios.get('/user/3')
+            .then(res => setUser({
+                username: res.data.username,
+                email: res.data.email,
+                name: res.data.name,
+                lastname: res.data.lastname,
+                dateOfBirth: res.data.dateOfBirth,
+                about: res.data.about
+            })).then(console.log(userDTO));
+    }, [setUser])
 
     const onChange = (event) => {
         const value = event.target.value;
@@ -21,8 +34,8 @@ const EditUserInfo = ({ user }) => {
         })
     }
 
-    const handleSubmit = (event) =>{
-        var str = '/user/update'+user.id
+    const handleSubmit = (event) => {
+        var str = '/user/update/3'
         axios.patch(str, userDTO)
     }
 
@@ -45,11 +58,11 @@ const EditUserInfo = ({ user }) => {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
-
                                 fullWidth
                                 name="username"
                                 label="Username"
                                 id="username"
+                                multiline
                                 value={userDTO.username}
                                 onChange={onChange}
                             />
@@ -60,8 +73,8 @@ const EditUserInfo = ({ user }) => {
                                 id="email"
                                 label="Email Address"
                                 name="email"
+                                multiline
                                 value={userDTO.email}
-                                autoComplete="email"
                                 onChange={onChange}
                             />
                         </Grid>
@@ -70,10 +83,10 @@ const EditUserInfo = ({ user }) => {
                                 autoComplete="given-name"
                                 name="name"
                                 fullWidth
+                                multiline
                                 id="firstName"
                                 value={userDTO.name}
                                 label="First Name"
-                                autoFocus
                                 onChange={onChange}
                             />
                         </Grid>
@@ -83,8 +96,8 @@ const EditUserInfo = ({ user }) => {
                                 id="lastname"
                                 label="Last Name"
                                 name="lastname"
+                                multiline
                                 value={userDTO.lastname}
-                                autoComplete="family-name"
                                 onChange={onChange}
                             />
                         </Grid>

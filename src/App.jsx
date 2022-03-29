@@ -1,21 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Test from "./components/Test";
-import CardPostList from "./components/CardPostList";
+
 import SignInForm from "./components/SignInForm";
 import SignUpForm from "./components/SignUpForm";
 import NewPost from "./components/NewPost";
+import FriendRequestList from "./components/FriendRequestList";
+import SearchForm from "./components/SearchForm";
+import Home from "./pages/Home";
+import MyAccount from "./pages/MyAccount";
+import Profile from "./pages/Profile";
 
 
 function App() {
- 
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Test name={'pera'} lastname={'peric'} />} />
-        <Route path="/about" element={<CardPostList />} />
-        <Route path="/login" element={<SignInForm/>} />
-        <Route path="/register" element={<SignUpForm/>}/>
-        <Route path="/newpost" element={<NewPost/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<SignInForm />} />
+        <Route path="/register" element={<SignUpForm />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/friendrequests" element={<FriendRequestList />} />
+        <Route path="/myaccount" element={<MyAccount />} />
+        <Route path="/search" element={<SearchForm />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,13 +1,19 @@
 import { PhotoCamera } from "@mui/icons-material";
 import { Avatar, Box, Container, IconButton, Input } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from '../axios';
 
-const UploadProfilePicture = ({ user }) => {
+const UploadProfilePicture = () => {
 
     const [profilePicture, setProfilePicture] = useState({
-        profilePicture: user.profilePicture
+        profilePicture: ''
     })
+
+    useEffect(()=>{
+    axios.get('/user/3')
+    .then(res => setProfilePicture(
+        {profilePicture : res.data.profilePicture})
+        )},[setProfilePicture])
 
     const handleChange=(event)=>{
         const value = event.target.files[0]

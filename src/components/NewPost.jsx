@@ -40,6 +40,7 @@ const NewPost = () => {
                     container
                     justifyContent="center"
                     alignItems="center"
+                    spacing = {2}
                      >
                 <TextField
                     id="newpost"
@@ -47,15 +48,9 @@ const NewPost = () => {
                     multiline
                     onChange= {onChange}
                 />
-                </Grid>
-                <Grid  
-                    container
-                    justifyContent="right"
-                    alignItems="right"
-                    width ='168ch' 
-                    display = 'flex'>
                 <Button variant="contained" onClick={handleClick}>Post</Button>
                 </Grid>
+               
         </Box>
     )
 }
